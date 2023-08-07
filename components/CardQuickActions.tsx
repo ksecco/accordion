@@ -10,7 +10,7 @@ const CardQuickActions = () => (
   <>
     <View style={[styles.row, styles.headerContainer]}>
       <AppText style={styles.headerText}>*****BTC</AppText>
-      <Icon name="eye-off-outline" color={colors.GOLD} style={styles.icon} />
+      <Icon name="eye-off-outline" color={colors.GOLD} style={[styles.icon, styles.mirror]} />
     </View>
     <View style={[styles.row, styles.buttonContainer]}>
       <Button text="Send BTC">
@@ -35,14 +35,17 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     marginBottom: 60,
+    alignItems: 'center'
   },
   headerText: {
     color: colors.GRAY_PRIMARY,
     fontSize: fontSizes.LG,
   },
   icon: {
-    transform: [{ scaleY: -1 }],
     paddingLeft: 12,
+  },
+  mirror: {
+    transform: [{ scaleY: -1 }],
   },
   row: {
     flexDirection: "row",
