@@ -20,7 +20,7 @@ export type AccordionProps = {
   title?: string;
 };
 
-type CardStatus = "closing" | "collapsed" | "expanded" | "opening";
+export type CardStatus = "closing" | "collapsed" | "expanded" | "opening";
 
 const Accordion = ({
   cardContainerStyle = {},
@@ -129,7 +129,11 @@ const Accordion = ({
         )}
       </Pressable>
 
-      <Animated.View style={cardStyles}>{children}</Animated.View>
+      <Animated.View style={cardStyles}>
+        {React.Children.map(children, (child) =>
+          React.cloneElement(child, { cardStatus })
+        )}
+      </Animated.View>
     </View>
   );
 };

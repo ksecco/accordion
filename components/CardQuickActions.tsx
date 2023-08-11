@@ -1,31 +1,49 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
+import { type CardStatus } from "./Accordion";
 import AppText from "./AppText";
 import Button from "./Button";
 import Icon from "./Icon";
 import colors from "../constants/colors";
 import { fontSizes } from "../constants/font";
 
-const CardQuickActions = () => (
-  <>
-    <View style={[styles.row, styles.headerContainer]}>
-      <AppText style={styles.headerText}>*****BTC</AppText>
-      <Icon name="eye-off-outline" color={colors.GOLD} style={[styles.icon, styles.mirror]} />
-    </View>
-    <View style={[styles.row, styles.buttonContainer]}>
-      <Button text="Send BTC">
-        <Icon name="arrow-up-circle-outline" style={styles.icon} />
-      </Button>
-      <Button text="Receive BTC" secondary>
+type CardQuickActionsProps = {
+  cardStatus?: CardStatus;
+};
+
+const CardQuickActions = ({ cardStatus }: CardQuickActionsProps) => {
+  console.log(cardStatus);
+  return (
+    <>
+      <View style={[styles.row, styles.headerContainer]}>
+        <AppText style={styles.headerText}>*****BTC</AppText>
         <Icon
-          name="arrow-down-circle-outline"
-          color={colors.BLACK}
-          style={styles.icon}
+          name="eye-off-outline"
+          color={colors.GOLD}
+          style={[styles.icon, styles.mirror]}
         />
-      </Button>
-    </View>
-  </>
-);
+      </View>
+      <View
+        style={[
+          styles.row,
+          styles.buttonContainer,
+          { display: cardStatus === "expanded" ? "flex" : "none" },
+        ]}
+      >
+        <Button text="Send BTC" secondary>
+          <Icon name="arrow-up-circle-outline" style={styles.icon} />
+        </Button>
+        <Button text="Receive BTC">
+          <Icon
+            name="arrow-down-circle-outline"
+            color={colors.BLACK}
+            style={styles.icon}
+          />
+        </Button>
+      </View>
+    </>
+  );
+};
 
 const styles = StyleSheet.create({
   buttonContainer: {
@@ -35,7 +53,7 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     marginBottom: 60,
-    alignItems: 'center'
+    alignItems: "center",
   },
   headerText: {
     color: colors.GRAY_PRIMARY,

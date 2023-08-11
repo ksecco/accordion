@@ -1,42 +1,39 @@
 import { Image, ScrollView, StyleSheet } from "react-native";
-import Accordion from "../components/Accordion";
+import Button from "../components/Button";
+import Icon from "../components/Icon";
 import SafeAreaWrapper from "../components/SafeAreaWrapper";
 import colors from "../constants/colors";
-import CardQuickActions from "../components/CardQuickActions";
 
-const DashboardScreen = () => (
+const LoginScreen = ({ navigation }) => (
   <SafeAreaWrapper>
     <ScrollView contentContainerStyle={styles.container}>
       <Image
         source={require("../assets/images/theya.png")}
         style={styles.logo}
       />
-      <Accordion
-        title="Quick Actions"
-        containerStyle={styles.accordionContainer}
-      >
-        <CardQuickActions />
-      </Accordion>
+      <Button text="Login" onPress={() => navigation.navigate("Dashboard")}>
+        <Icon name="arrow-forward-circle-outline" color={colors.BLACK} style={styles.icon} />
+      </Button>
     </ScrollView>
   </SafeAreaWrapper>
 );
 
 const styles = StyleSheet.create({
-  accordionContainer: {
-    marginVertical: 24,
-  },
   container: {
     flex: 1,
-    justifyContent: "flex-start",
+    justifyContent: "center",
     alignItems: "center",
     backgroundColor: colors.BLACK_SECONDARY,
   },
+  icon: {
+    paddingLeft: 12,
+  },
   logo: {
+    position: "absolute",
     height: 100,
     width: 100,
-    margin: 24,
-    marginTop: 48,
+    top: 48,
   },
 });
 
-export default DashboardScreen;
+export default LoginScreen;

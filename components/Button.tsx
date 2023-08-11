@@ -5,13 +5,24 @@ import colors from "../constants/colors";
 
 type ButtonProps = {
   children?: ReactElement;
+  onPress?: () => void;
   secondary?: boolean;
   text: string;
 };
 
-const Button = ({ children, secondary, text }: ButtonProps) => (
-  <TouchableOpacity style={[styles.container, secondary && styles.secondary]}>
-    <AppText style={secondary && styles.secondaryText}>{text}</AppText>
+const Button = ({
+  children,
+  onPress = () => {},
+  secondary,
+  text,
+}: ButtonProps) => (
+  <TouchableOpacity
+    style={[styles.container, secondary && styles.secondary]}
+    onPress={onPress}
+  >
+    <AppText style={secondary ? styles.secondaryText : styles.primaryText}>
+      {text}
+    </AppText>
     {children}
   </TouchableOpacity>
 );
@@ -25,13 +36,17 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 8,
-    backgroundColor: colors.BLACK_SECONDARY,
-  },
-  secondary: {
+    color: colors.BLACK,
     backgroundColor: colors.GOLD,
   },
-  secondaryText: {
+  primaryText: {
     color: colors.BLACK,
+  },
+  secondary: {
+    backgroundColor: colors.BLACK_SECONDARY,
+  },
+  secondaryText: {
+    color: colors.GRAY_SECONDARY,
   },
 });
 
